@@ -1,0 +1,43 @@
+{
+    "name": "mesh-research/commons-domain-mapping",
+    "description": "Network admin screen and WP-CLI command for mapping custom hostnames to sites on the Knowledge Commons multisite.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "homepage": "https://github.com/MESH-Research/commons-domain-mapping",
+    "require": {
+        "php": "^8.5",
+        "composer/installers": "^1.0 || ^2.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "MeshResearch\\DomainMapping\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MeshResearch\\DomainMapping\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "test:js": "node --test tests/js/*.test.js",
+        "lint": "for f in commons-domain-mapping.php $(find src -name '*.php'); do php -l \"$f\" > /dev/null || exit 1; done; echo 'Lint OK'",
+        "check": [
+            "@lint",
+            "@test",
+            "@test:js"
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true
+        },
+        "sort-packages": true
+    },
+    "archive": {
+        "exclude": ["/tests", "/docs", "/.github", "/phpunit.xml.dist", "/pyproject.toml", "/.gitignore"]
+    }
+}
