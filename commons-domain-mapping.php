@@ -3,7 +3,7 @@
  * Plugin Name:       Commons Domain Mapping
  * Plugin URI:        https://github.com/MESH-Research/commons-domain-mapping
  * Description:       Map custom hostnames to sites on the Knowledge Commons multisite so sunrise.php resolves them and issues login cookies on the right domain. Super administrators only.
- * Version:           1.0.0
+ * Version:           1.1.0
  * Requires at least: 6.5
  * Requires PHP:      8.5
  * Author:            MESH Research
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'COMMONS_DOMAIN_MAPPING_VERSION', '1.0.0' );
+define( 'COMMONS_DOMAIN_MAPPING_VERSION', '1.1.0' );
 define( 'COMMONS_DOMAIN_MAPPING_FILE', __FILE__ );
 define( 'COMMONS_DOMAIN_MAPPING_DIR', __DIR__ );
 

@@ -1,12 +1,12 @@
 [project]
 name = "commons-domain-mapping"
-version = "1.0.0"
+version = "1.1.0"
 description = "Network admin screen and WP-CLI command for mapping custom hostnames to sites on the Knowledge Commons multisite."
 readme = "README.md"
 requires-python = ">=3.12"
 
 [tool.commitizen]
-version = "1.0.0"
+version = "1.1.0"
 version_files = [
     "commons-domain-mapping.php:Version:",
     "commons-domain-mapping.php:COMMONS_DOMAIN_MAPPING_VERSION",
