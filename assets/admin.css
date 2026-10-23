@@ -1,0 +1,561 @@
+/*
+ * Commons Domain Mapping — network admin screen.
+ * Uses the WordPress admin palette so it reads as part of wp-admin, with
+ * every token overridable from :root.
+ */
+.cdm-wrap {
+	--cdm-text: #1d2327;
+	--cdm-text-muted: #50575e;
+	--cdm-surface: #ffffff;
+	--cdm-surface-muted: #f6f7f7;
+	--cdm-border: #c3c4c7;
+	--cdm-border-strong: #8c8f94;
+	--cdm-accent: var(--wp-admin-theme-color, #2271b1);
+	--cdm-accent-soft: #f0f6fc;
+	--cdm-success: #00712e;
+	--cdm-success-soft: #edfaef;
+	--cdm-warning: #8a6100;
+	--cdm-warning-soft: #fcf9e8;
+	--cdm-warning-edge: #dba617;
+	--cdm-danger: #b32d2e;
+	--cdm-danger-soft: #fcf0f1;
+	--cdm-radius: 4px;
+	--cdm-space-1: 0.25rem;
+	--cdm-space-2: 0.5rem;
+	--cdm-space-3: 0.75rem;
+	--cdm-space-4: 1rem;
+	--cdm-space-5: 1.5rem;
+	--cdm-space-6: 2rem;
+	--cdm-mono: ui-monospace, Menlo, Consolas, "Liberation Mono", monospace;
+	max-width: 1400px;
+	color: var(--cdm-text);
+}
+
+.cdm-wrap h1 {
+	margin-bottom: var(--cdm-space-2);
+}
+
+.cdm-lede {
+	max-width: 70ch;
+	margin: 0 0 var(--cdm-space-5);
+	font-size: 14px;
+	line-height: 1.6;
+	color: var(--cdm-text-muted);
+}
+
+.cdm-muted {
+	color: var(--cdm-text-muted);
+}
+
+/* Notice: focused on load by admin.js so screen readers announce it. */
+.cdm-notice {
+	margin: 0 0 var(--cdm-space-5);
+}
+
+.cdm-notice:focus {
+	outline: 2px solid var(--cdm-accent);
+	outline-offset: 2px;
+}
+
+/* Layout ---------------------------------------------------------------- */
+.cdm-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--cdm-space-5);
+	align-items: start;
+	margin-bottom: var(--cdm-space-5);
+}
+
+@media (min-width: 1100px) {
+	.cdm-layout {
+		grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+	}
+}
+
+/* Cards ----------------------------------------------------------------- */
+.cdm-card {
+	background: var(--cdm-surface);
+	border: 1px solid var(--cdm-border);
+	border-radius: var(--cdm-radius);
+	padding: var(--cdm-space-5);
+	margin: 0 0 var(--cdm-space-5);
+}
+
+.cdm-layout > .cdm-card {
+	margin: 0;
+}
+
+.cdm-card--muted {
+	background: var(--cdm-surface-muted);
+}
+
+.cdm-card--attention {
+	border-left: 4px solid var(--cdm-warning-edge);
+	background: var(--cdm-warning-soft);
+}
+
+.cdm-card__title {
+	display: flex;
+	align-items: center;
+	gap: var(--cdm-space-2);
+	margin: 0 0 var(--cdm-space-4);
+	font-size: 1.05rem;
+	font-weight: 600;
+	line-height: 1.3;
+}
+
+.cdm-card--attention .cdm-card__title .dashicons {
+	color: var(--cdm-warning);
+}
+
+.cdm-count {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 1.5rem;
+	height: 1.5rem;
+	padding: 0 var(--cdm-space-2);
+	border-radius: 999px;
+	background: var(--cdm-surface-muted);
+	border: 1px solid var(--cdm-border);
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--cdm-text-muted);
+}
+
+/* Attention list -------------------------------------------------------- */
+.cdm-attention-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.cdm-attention-item {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--cdm-space-3);
+	padding: var(--cdm-space-3) 0;
+	border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.cdm-attention-item__site {
+	display: flex;
+	flex-direction: column;
+	gap: var(--cdm-space-1);
+}
+
+/* Form ------------------------------------------------------------------ */
+.cdm-form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--cdm-space-4);
+}
+
+.cdm-field {
+	display: flex;
+	flex-direction: column;
+	gap: var(--cdm-space-1);
+	position: relative;
+}
+
+.cdm-label {
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.cdm-help {
+	margin: 0;
+	font-size: 12px;
+	line-height: 1.5;
+	color: var(--cdm-text-muted);
+}
+
+.cdm-wrap .cdm-input {
+	width: 100%;
+	max-width: 100%;
+	min-height: 36px;
+	padding: 0 var(--cdm-space-3);
+	border: 1px solid var(--cdm-border-strong);
+	border-radius: var(--cdm-radius);
+	font-size: 14px;
+	line-height: 2;
+	box-shadow: none;
+}
+
+.cdm-wrap .cdm-input:focus {
+	border-color: var(--cdm-accent);
+	box-shadow: 0 0 0 1px var(--cdm-accent);
+	outline: 2px solid transparent;
+}
+
+.cdm-wrap .cdm-input--short {
+	max-width: 10rem;
+}
+
+#cdm-hostname {
+	font-family: var(--cdm-mono);
+	font-size: 13px;
+}
+
+.cdm-field--checkbox {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	column-gap: var(--cdm-space-2);
+	row-gap: var(--cdm-space-1);
+	align-items: start;
+}
+
+.cdm-field--checkbox input[type="checkbox"] {
+	margin: 2px 0 0;
+}
+
+.cdm-field--checkbox .cdm-help {
+	grid-column: 2;
+}
+
+.cdm-actions {
+	display: flex;
+	gap: var(--cdm-space-2);
+	padding-top: var(--cdm-space-2);
+}
+
+/* Progressive enhancement: hide the combobox until JS confirms it works,
+   and hide the raw ID field once it does. */
+.cdm-js-only {
+	display: none;
+}
+
+.cdm-js .cdm-js-only {
+	display: block;
+}
+
+.cdm-js .cdm-id-field {
+	display: none;
+}
+
+.cdm-js .cdm-id-field.is-visible {
+	display: flex;
+	flex-direction: column;
+	gap: var(--cdm-space-1);
+	margin-top: var(--cdm-space-2);
+}
+
+/* Combobox -------------------------------------------------------------- */
+.cdm-combobox__control {
+	position: relative;
+}
+
+.cdm-combobox__listbox {
+	position: absolute;
+	z-index: 20;
+	top: calc(100% + 4px);
+	left: 0;
+	right: 0;
+	max-height: 18rem;
+	overflow-y: auto;
+	margin: 0;
+	padding: var(--cdm-space-1);
+	list-style: none;
+	background: var(--cdm-surface);
+	border: 1px solid var(--cdm-border-strong);
+	border-radius: var(--cdm-radius);
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.cdm-combobox__listbox[hidden] {
+	display: none;
+}
+
+.cdm-option {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin: 0;
+	padding: var(--cdm-space-2) var(--cdm-space-3);
+	border-left: 3px solid transparent;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+.cdm-option__name {
+	font-weight: 600;
+}
+
+.cdm-option__meta {
+	font-size: 12px;
+	color: var(--cdm-text-muted);
+}
+
+.cdm-option[aria-selected="true"] {
+	background: var(--cdm-accent-soft);
+	border-left-color: var(--cdm-accent);
+	outline: 1px solid var(--cdm-accent);
+	outline-offset: -1px;
+}
+
+.cdm-option--empty {
+	cursor: default;
+	color: var(--cdm-text-muted);
+}
+
+.cdm-selected {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--cdm-space-3);
+	margin-top: var(--cdm-space-2);
+	padding: var(--cdm-space-3);
+	background: var(--cdm-accent-soft);
+	border: 1px solid var(--cdm-accent);
+	border-radius: var(--cdm-radius);
+}
+
+.cdm-selected[hidden] {
+	display: none;
+}
+
+.cdm-selected__body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.cdm-selected__eyebrow {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	color: var(--cdm-text-muted);
+}
+
+.cdm-selected__name {
+	overflow-wrap: anywhere;
+}
+
+/* Table ----------------------------------------------------------------- */
+.cdm-table-scroll {
+	overflow-x: auto;
+	margin: 0 calc(-1 * var(--cdm-space-5));
+	padding: 0 var(--cdm-space-5);
+	/* Scroll shadows: a visual cue that more columns are off-screen. */
+	background:
+		linear-gradient(to right, var(--cdm-surface) 30%, rgba(255, 255, 255, 0)) left,
+		linear-gradient(to left, var(--cdm-surface) 30%, rgba(255, 255, 255, 0)) right,
+		linear-gradient(to right, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0)) left,
+		linear-gradient(to left, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0)) right;
+	background-repeat: no-repeat;
+	background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
+	background-attachment: local, local, scroll, scroll;
+}
+
+.cdm-table-scroll:focus {
+	outline: 2px solid var(--cdm-accent);
+	outline-offset: -2px;
+}
+
+.cdm-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.cdm-table th,
+.cdm-table td {
+	padding: var(--cdm-space-3) var(--cdm-space-2);
+	text-align: left;
+	vertical-align: middle;
+	border-bottom: 1px solid var(--cdm-border);
+}
+
+.cdm-table thead th {
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+	color: var(--cdm-text-muted);
+	border-bottom: 2px solid var(--cdm-border);
+}
+
+.cdm-table tbody tr:last-child th,
+.cdm-table tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+.cdm-table tbody tr:hover {
+	background: var(--cdm-surface-muted);
+}
+
+.cdm-table__host {
+	font-weight: 400;
+	white-space: nowrap;
+}
+
+.cdm-host {
+	font-family: var(--cdm-mono);
+	font-size: 13px;
+	background: transparent;
+	padding: 0;
+}
+
+.cdm-host-link {
+	text-decoration: none;
+}
+
+.cdm-host-link:hover,
+.cdm-host-link:focus {
+	text-decoration: underline;
+}
+
+.cdm-table__site {
+	min-width: 14rem;
+}
+
+.cdm-site-name {
+	display: block;
+	font-weight: 600;
+}
+
+.cdm-site-meta {
+	display: block;
+	font-size: 12px;
+	margin-top: 2px;
+}
+
+.cdm-table__actions {
+	text-align: right;
+}
+
+.cdm-inline-form {
+	display: inline-block;
+	margin: 2px 0 2px var(--cdm-space-1);
+}
+
+.cdm-wrap .cdm-button--danger {
+	color: var(--cdm-danger);
+	border-color: var(--cdm-danger);
+}
+
+.cdm-wrap .cdm-button--danger:hover,
+.cdm-wrap .cdm-button--danger:focus {
+	color: #fff;
+	background: var(--cdm-danger);
+	border-color: var(--cdm-danger);
+}
+
+/* Status pills: colour plus icon plus text, never colour alone. */
+.cdm-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--cdm-space-1);
+	padding: 2px var(--cdm-space-2) 2px var(--cdm-space-1);
+	border: 1px solid currentColor;
+	border-radius: 999px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.5;
+	white-space: nowrap;
+}
+
+.cdm-pill .dashicons {
+	font-size: 16px;
+	width: 16px;
+	height: 16px;
+}
+
+.cdm-pill--primary {
+	color: var(--cdm-success);
+	background: var(--cdm-success-soft);
+}
+
+.cdm-pill--alias {
+	color: var(--cdm-text-muted);
+	background: var(--cdm-surface-muted);
+}
+
+.cdm-pill--orphan {
+	color: var(--cdm-danger);
+	background: var(--cdm-danger-soft);
+}
+
+/* Empty state ----------------------------------------------------------- */
+.cdm-empty {
+	padding: var(--cdm-space-6) var(--cdm-space-4);
+	text-align: center;
+	border: 1px dashed var(--cdm-border);
+	border-radius: var(--cdm-radius);
+}
+
+.cdm-empty .dashicons {
+	font-size: 32px;
+	width: 32px;
+	height: 32px;
+	color: var(--cdm-border-strong);
+}
+
+.cdm-empty p {
+	margin: var(--cdm-space-2) 0 0;
+}
+
+/* How it works ---------------------------------------------------------- */
+.cdm-steps {
+	margin: 0 0 var(--cdm-space-3) 1.25rem;
+	line-height: 1.6;
+}
+
+.cdm-steps li + li {
+	margin-top: var(--cdm-space-2);
+}
+
+/* Focus visibility for everything interactive in the screen. */
+.cdm-wrap a:focus-visible,
+.cdm-wrap button:focus-visible,
+.cdm-wrap .button-link:focus-visible {
+	outline: 2px solid var(--cdm-accent);
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+/* Forced-colours (Windows High Contrast) keeps state visible. */
+@media (forced-colors: active) {
+	.cdm-option[aria-selected="true"] {
+		outline: 2px solid Highlight;
+		forced-color-adjust: none;
+		background: Highlight;
+		color: HighlightText;
+	}
+
+	.cdm-pill,
+	.cdm-selected,
+	.cdm-card {
+		border-color: CanvasText;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.cdm-wrap * {
+		transition: none !important;
+		animation: none !important;
+	}
+}
+
+@media (max-width: 782px) {
+	.cdm-card {
+		padding: var(--cdm-space-4);
+	}
+
+	.cdm-table-scroll {
+		margin: 0 calc(-1 * var(--cdm-space-4));
+		padding: 0 var(--cdm-space-4);
+	}
+
+	.cdm-table__actions {
+		text-align: left;
+	}
+
+	.cdm-inline-form {
+		margin: var(--cdm-space-1) var(--cdm-space-1) 0 0;
+	}
+}
